@@ -204,7 +204,7 @@ export function App() {
         </main>
 
         {/* Right Side: Docked Right-Hand Side AI Agent Copilot Drawer (~25% width) */}
-        <RightSidebarChatbot onAddLog={handleAddLog} />
+        <RightSidebarChatbot isLoggedIn={isLoggedIn} onAddLog={handleAddLog} />
       </div>
 
       {/* Policy Edit Modal */}
