@@ -80,7 +80,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           </div>
         )}
 
-        {/* Right: Sign In / Judge Demo CTA or Sign Out */}
+        {/* Right: Sign In CTA or Sign Out */}
         <div className="flex items-center gap-3">
           {isLoggedIn ? (
             <button
@@ -97,7 +97,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               className="flex items-center gap-2 px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs shadow-lg shadow-indigo-600/30 transition-all hover:scale-105"
             >
               <LogIn className="w-4 h-4" />
-              <span>Sign In / Judge Demo</span>
+              <span>Sign In</span>
             </button>
           )}
         </div>

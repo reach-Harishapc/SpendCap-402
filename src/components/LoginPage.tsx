@@ -6,7 +6,7 @@ interface LoginPageProps {
 }
 
 export const LoginPage: React.FC<LoginPageProps> = ({ onLoginSuccess }) => {
-  const [email, setEmail] = useState<string>('judge@brainwave.ai');
+  const [email, setEmail] = useState<string>('admin@spendcap402.io');
   const [password, setPassword] = useState<string>('x402-demo-2026');
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -41,14 +41,14 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLoginSuccess }) => {
           </p>
         </div>
 
-        {/* Judge Pre-filled Credentials Banner */}
+        {/* Demo Administrator Credentials Banner */}
         <div className="p-3.5 rounded-2xl bg-indigo-950/60 border border-indigo-500/30 text-xs space-y-1.5">
           <div className="font-bold text-indigo-300 flex items-center gap-1.5 uppercase tracking-wider text-[10px]">
             <Sparkles className="w-3.5 h-3.5 text-indigo-400" />
-            Hackathon Judge Pre-filled Credentials
+            Demo Administrator Credentials
           </div>
           <div className="flex items-center justify-between font-mono text-[11px] text-slate-300">
-            <span>Email: <strong className="text-white">judge@brainwave.ai</strong></span>
+            <span>Email: <strong className="text-white">admin@spendcap402.io</strong></span>
             <span>Pass: <strong className="text-white">x402-demo-2026</strong></span>
           </div>
         </div>
@@ -96,7 +96,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLoginSuccess }) => {
               </span>
             ) : (
               <span className="flex items-center gap-2">
-                1-Click Demo Login as Judge
+                1-Click Demo Admin Login
                 <ArrowRight className="w-4 h-4" />
               </span>
             )}

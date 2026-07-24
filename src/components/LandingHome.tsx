@@ -13,7 +13,7 @@ export const LandingHome: React.FC<LandingHomeProps> = ({ onLaunchConsole, setAc
       <section className="relative text-center space-y-6 max-w-4xl mx-auto py-10">
         <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-300 text-xs font-semibold">
           <Sparkles className="w-3.5 h-3.5 text-indigo-400" />
-          <span>Brainwave 2026 — X402 Blockchain Track</span>
+          <span>Enterprise Agentic Micropayment Gateway</span>
         </div>
 
         <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-white leading-tight">

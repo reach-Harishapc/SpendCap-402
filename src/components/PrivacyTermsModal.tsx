@@ -51,13 +51,13 @@ export const PrivacyTermsModal: React.FC<PrivacyTermsModalProps> = ({ type, onCl
               </div>
               <div>
                 <h3 className="text-lg font-bold text-white">Terms of Service</h3>
-                <p className="text-xs text-slate-400">Last updated: July 2026 — Brainwave 2026 License Terms</p>
+                <p className="text-xs text-slate-400">Last updated: July 2026 — Production Enterprise Standards</p>
               </div>
             </div>
 
             <div className="space-y-3 leading-relaxed">
               <h4 className="font-bold text-white text-sm">1. Open Source MIT License</h4>
-              <p>SpendCap 402 is provided as an open-source demonstration project for the Brainwave 2026 X402 Blockchain Track under the MIT License.</p>
+              <p>SpendCap 402 is provided as an open-source software project under the MIT License.</p>
 
               <h4 className="font-bold text-white text-sm">2. Policy Engine Disclaimer</h4>
               <p>While SpendCap 402 enforces strict per-call caps and daily budget limits, developers deploying autonomous AI agents in production environments remain responsible for allocating wallet testnet/mainnet funds.</p>

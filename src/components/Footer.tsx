@@ -9,7 +9,7 @@ interface FooterProps {
 
 export const Footer: React.FC<FooterProps> = ({ setActiveTab, onOpenPrivacy, onOpenTerms }) => {
   return (
-    <footer className="border-t border-slate-800/80 bg-slate-950/90 text-slate-400 py-12 px-4 lg:px-8 mt-12">
+    <footer className="border-t border-slate-800/80 bg-slate-950/90 text-slate-400 py-12 px-4 lg:px-8 mt-12 font-['Plus_Jakarta_Sans',sans-serif]">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
         {/* Col 1: Brand & Tagline */}
         <div className="space-y-3">
@@ -81,19 +81,19 @@ export const Footer: React.FC<FooterProps> = ({ setActiveTab, onOpenPrivacy, onO
           </ul>
         </div>
 
-        {/* Col 4: Hackathon Event Details */}
+        {/* Col 4: Network & Protocol Specs */}
         <div className="space-y-3">
-          <h4 className="text-xs font-bold text-white uppercase tracking-wider">Brainwave 2026 Track</h4>
+          <h4 className="text-xs font-bold text-white uppercase tracking-wider">Protocol Standards</h4>
           <div className="p-3 rounded-xl bg-slate-900 border border-slate-800 space-y-1.5 text-xs">
-            <div className="font-semibold text-white">X402 Blockchain Track</div>
-            <div className="text-slate-400 text-[11px]">Track 2 (Infrastructure) & Track 1 (AI Applications)</div>
-            <div className="text-indigo-400 font-mono text-[10px] font-bold">ACTS EDC Hackathon</div>
+            <div className="font-semibold text-white">x402 Micropayment Rail</div>
+            <div className="text-slate-400 text-[11px]">EIP-712 Typed Cryptographic Signatures</div>
+            <div className="text-indigo-400 font-mono text-[10px] font-bold">Base Mainnet Chain 8453</div>
           </div>
         </div>
       </div>
 
       <div className="max-w-7xl mx-auto mt-8 pt-6 border-t border-slate-800/60 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-4">
-        <div>© 2026 SpendCap 402. All rights reserved. Built for Brainwave 2026.</div>
+        <div>© 2026 SpendCap 402. All rights reserved. Production Enterprise Standard.</div>
         <div className="flex items-center gap-4">
           <button onClick={onOpenPrivacy} className="hover:text-slate-300">Privacy Policy</button>
           <span>•</span>
