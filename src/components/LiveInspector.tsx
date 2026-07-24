@@ -51,7 +51,7 @@ export const LiveInspector: React.FC = () => {
         'Domain-Whitelist': 'PASSED (api.codeaudit.ai)'
       },
       body: {
-        x402AuthSignature: 'x402_sig_0x9b4a18ef72c81a94200d72f10b2401a61e0b',
+        x402AuthSignature: 'x402_sig_demo_auth_sample_981a4f',
         signerWallet: '0x71C7656EC7ab88b098defB751B7401B5f6d8976F',
         timestamp: '15:34:10.080'
       },
