@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { Navbar } from './components/Navbar';
+import { LoginPage } from './components/LoginPage';
+import { LandingHome } from './components/LandingHome';
 import { StatsOverview } from './components/StatsOverview';
 import { SpendChart } from './components/SpendChart';
 import { FleetTable } from './components/FleetTable';
@@ -8,18 +10,21 @@ import { LiveInspector } from './components/LiveInspector';
 import { ApiPlayground } from './components/ApiPlayground';
 import { ArchitectureView } from './components/ArchitectureView';
 import { Documentation } from './components/Documentation';
-import { MultiAgentConsole } from './components/MultiAgentConsole';
 import { RightSidebarChatbot } from './components/RightSidebarChatbot';
+import { PrivacyTermsModal } from './components/PrivacyTermsModal';
 import { Footer } from './components/Footer';
 import { INITIAL_AGENTS, INITIAL_LOGS } from './lib/mockData';
 import { Agent, InterceptLog, PolicyRule } from './lib/types';
 import { Activity } from 'lucide-react';
 
 export function App() {
-  const [activeTab, setActiveTab] = useState<string>('dashboard');
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(true); // Logged in by default for instant judge access
+  const [activeTab, setActiveTab] = useState<string>('home');
   const [agents, setAgents] = useState<Agent[]>(INITIAL_AGENTS);
   const [logs, setLogs] = useState<InterceptLog[]>(INITIAL_LOGS);
   const [selectedAgentForPolicy, setSelectedAgentForPolicy] = useState<Agent | null>(null);
+
+  const [modalType, setModalType] = useState<'privacy' | 'terms' | null>(null);
 
   const handleToggleStatus = (agentId: string) => {
     setAgents((prev) =>
@@ -69,15 +74,32 @@ export function App() {
     }
   };
 
+  if (!isLoggedIn) {
+    return <LoginPage onLoginSuccess={() => { setIsLoggedIn(true); setActiveTab('home'); }} />;
+  }
+
   return (
     <div className="min-h-screen bg-[#090d16] text-slate-100 flex flex-col font-['Plus_Jakarta_Sans',sans-serif]">
       {/* Top Navbar */}
-      <Navbar activeTab={activeTab} setActiveTab={setActiveTab} />
+      <Navbar
+        activeTab={activeTab}
+        setActiveTab={setActiveTab}
+        isLoggedIn={isLoggedIn}
+        onLogout={() => setIsLoggedIn(false)}
+      />
 
-      {/* Main Layout Container (Left Content + Right Copilot Sidebar Layout) */}
+      {/* Main Layout Container */}
       <div className="flex-1 flex flex-col lg:flex-row w-full max-w-[1600px] mx-auto">
         {/* Left Side: Main Page Views (~75% width) */}
         <main className="flex-1 px-4 lg:px-8 py-8 space-y-8 min-w-0">
+          {/* Tab 0: Platform Capabilities Home View */}
+          {activeTab === 'home' && (
+            <LandingHome
+              onLaunchConsole={() => setActiveTab('dashboard')}
+              setActiveTab={setActiveTab}
+            />
+          )}
+
           {/* Tab 1: Dashboard & Fleet Management */}
           {activeTab === 'dashboard' && (
             <div className="space-y-8 animate-fade-in">
@@ -161,8 +183,15 @@ export function App() {
         />
       )}
 
+      {/* Privacy Policy & Terms Modal */}
+      <PrivacyTermsModal type={modalType} onClose={() => setModalType(null)} />
+
       {/* Enterprise Footer */}
-      <Footer setActiveTab={setActiveTab} />
+      <Footer
+        setActiveTab={setActiveTab}
+        onOpenPrivacy={() => setModalType('privacy')}
+        onOpenTerms={() => setModalType('terms')}
+      />
     </div>
   );
 }

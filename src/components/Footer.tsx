@@ -3,9 +3,11 @@ import { ShieldCheck, Github, ExternalLink, Globe, Layers, BookOpen, FileCode } 
 
 interface FooterProps {
   setActiveTab: (tab: string) => void;
+  onOpenPrivacy?: () => void;
+  onOpenTerms?: () => void;
 }
 
-export const Footer: React.FC<FooterProps> = ({ setActiveTab }) => {
+export const Footer: React.FC<FooterProps> = ({ setActiveTab, onOpenPrivacy, onOpenTerms }) => {
   return (
     <footer className="border-t border-slate-800/80 bg-slate-950/90 text-slate-400 py-12 px-4 lg:px-8 mt-12">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
@@ -32,6 +34,11 @@ export const Footer: React.FC<FooterProps> = ({ setActiveTab }) => {
           <h4 className="text-xs font-bold text-white uppercase tracking-wider">Application Modules</h4>
           <ul className="space-y-2 text-xs">
             <li>
+              <button onClick={() => setActiveTab('home')} className="hover:text-indigo-400 transition-colors">
+                Platform Capabilities Home
+              </button>
+            </li>
+            <li>
               <button onClick={() => setActiveTab('dashboard')} className="hover:text-indigo-400 transition-colors">
                 Dashboard & Fleet Quotas
               </button>
@@ -46,33 +53,30 @@ export const Footer: React.FC<FooterProps> = ({ setActiveTab }) => {
                 Interactive API Playground
               </button>
             </li>
-            <li>
-              <button onClick={() => setActiveTab('architecture')} className="hover:text-indigo-400 transition-colors">
-                Architecture & Track Compliance
-              </button>
-            </li>
           </ul>
         </div>
 
-        {/* Col 3: Protocol Specifications */}
+        {/* Col 3: Legal & Standards */}
         <div className="space-y-3">
-          <h4 className="text-xs font-bold text-white uppercase tracking-wider">Protocol Standards</h4>
+          <h4 className="text-xs font-bold text-white uppercase tracking-wider">Legal & Compliance</h4>
           <ul className="space-y-2 text-xs">
-            <li className="flex items-center gap-1.5 text-slate-300">
-              <span className="w-1.5 h-1.5 rounded-full bg-indigo-400"></span>
-              <span>HTTP 402 Payment Required (RFC 7231)</span>
+            <li>
+              <button onClick={onOpenPrivacy} className="hover:text-indigo-400 transition-colors">
+                Privacy Policy
+              </button>
             </li>
-            <li className="flex items-center gap-1.5 text-slate-300">
+            <li>
+              <button onClick={onOpenTerms} className="hover:text-indigo-400 transition-colors">
+                Terms of Service
+              </button>
+            </li>
+            <li className="flex items-center gap-1.5 text-slate-400 pt-1">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
-              <span>EIP-712 Typed Cryptographic Signatures</span>
+              <span>HTTP 402 (RFC 7231)</span>
             </li>
-            <li className="flex items-center gap-1.5 text-slate-300">
-              <span className="w-1.5 h-1.5 rounded-full bg-purple-400"></span>
-              <span>Base Mainnet (Chain ID: 8453)</span>
-            </li>
-            <li className="flex items-center gap-1.5 text-slate-300">
-              <span className="w-1.5 h-1.5 rounded-full bg-sky-400"></span>
-              <span>x402 Foundation Open Specification</span>
+            <li className="flex items-center gap-1.5 text-slate-400">
+              <span className="w-1.5 h-1.5 rounded-full bg-indigo-400"></span>
+              <span>Base Mainnet (8453)</span>
             </li>
           </ul>
         </div>
@@ -89,9 +93,13 @@ export const Footer: React.FC<FooterProps> = ({ setActiveTab }) => {
       </div>
 
       <div className="max-w-7xl mx-auto mt-8 pt-6 border-t border-slate-800/60 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-4">
-        <div>© 2026 SpendCap 402. All rights reserved. International Architecture Standard.</div>
+        <div>© 2026 SpendCap 402. All rights reserved. Built for Brainwave 2026.</div>
         <div className="flex items-center gap-4">
-          <a href="https://github.com" target="_blank" rel="noreferrer" className="hover:text-slate-300 flex items-center gap-1">
+          <button onClick={onOpenPrivacy} className="hover:text-slate-300">Privacy Policy</button>
+          <span>•</span>
+          <button onClick={onOpenTerms} className="hover:text-slate-300">Terms of Service</button>
+          <span>•</span>
+          <a href="https://github.com/reach-Harishapc/SpendCap-402" target="_blank" rel="noreferrer" className="hover:text-slate-300 flex items-center gap-1">
             <Github className="w-4 h-4" /> GitHub Repository
           </a>
         </div>
