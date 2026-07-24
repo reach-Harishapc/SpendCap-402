@@ -24,5 +24,6 @@ pnpm-debug.log*
 .DS_Store
 Thumbs.db
 
-# Local Devpost Submission notes
+# Local Devpost Submission & Voiceover notes
 DEVPOST_SUBMISSION.md
+VOICEOVER_SCRIPT.md
