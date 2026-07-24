@@ -18,7 +18,7 @@ import { Agent, InterceptLog, PolicyRule } from './lib/types';
 import { Activity } from 'lucide-react';
 
 export function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(true); // Logged in by default for instant judge access
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false); // Public entry point first
   const [activeTab, setActiveTab] = useState<string>('home');
   const [agents, setAgents] = useState<Agent[]>(INITIAL_AGENTS);
   const [logs, setLogs] = useState<InterceptLog[]>(INITIAL_LOGS);
@@ -74,10 +74,36 @@ export function App() {
     }
   };
 
-  if (!isLoggedIn) {
-    return <LoginPage onLoginSuccess={() => { setIsLoggedIn(true); setActiveTab('home'); }} />;
+  // 1. Unauthenticated Login Screen
+  if (!isLoggedIn && activeTab === 'login') {
+    return (
+      <div className="min-h-screen bg-[#090d16] text-slate-100 flex flex-col font-['Plus_Jakarta_Sans',sans-serif]">
+        <Navbar
+          activeTab={activeTab}
+          setActiveTab={setActiveTab}
+          isLoggedIn={isLoggedIn}
+          onNavigateToLogin={() => setActiveTab('login')}
+          onLogout={() => { setIsLoggedIn(false); setActiveTab('home'); }}
+        />
+        <div className="flex-1 flex items-center justify-center">
+          <LoginPage
+            onLoginSuccess={() => {
+              setIsLoggedIn(true);
+              setActiveTab('dashboard');
+            }}
+          />
+        </div>
+        <Footer
+          setActiveTab={setActiveTab}
+          onOpenPrivacy={() => setModalType('privacy')}
+          onOpenTerms={() => setModalType('terms')}
+        />
+        <PrivacyTermsModal type={modalType} onClose={() => setModalType(null)} />
+      </div>
+    );
   }
 
+  // 2. Main Layout Container
   return (
     <div className="min-h-screen bg-[#090d16] text-slate-100 flex flex-col font-['Plus_Jakarta_Sans',sans-serif]">
       {/* Top Navbar */}
@@ -85,22 +111,29 @@ export function App() {
         activeTab={activeTab}
         setActiveTab={setActiveTab}
         isLoggedIn={isLoggedIn}
-        onLogout={() => setIsLoggedIn(false)}
+        onNavigateToLogin={() => setActiveTab('login')}
+        onLogout={() => { setIsLoggedIn(false); setActiveTab('home'); }}
       />
 
-      {/* Main Layout Container */}
+      {/* Main Container */}
       <div className="flex-1 flex flex-col lg:flex-row w-full max-w-[1600px] mx-auto">
-        {/* Left Side: Main Page Views (~75% width) */}
+        {/* Left Side: Main View Area (~75% width) */}
         <main className="flex-1 px-4 lg:px-8 py-8 space-y-8 min-w-0">
-          {/* Tab 0: Platform Capabilities Home View */}
+          {/* Public Home Landing Page (Unauthenticated Entry OR Home Tab) */}
           {activeTab === 'home' && (
             <LandingHome
-              onLaunchConsole={() => setActiveTab('dashboard')}
+              onLaunchConsole={() => {
+                if (isLoggedIn) {
+                  setActiveTab('dashboard');
+                } else {
+                  setActiveTab('login');
+                }
+              }}
               setActiveTab={setActiveTab}
             />
           )}
 
-          {/* Tab 1: Dashboard & Fleet Management */}
+          {/* Authenticated Application Views */}
           {activeTab === 'dashboard' && (
             <div className="space-y-8 animate-fade-in">
               {/* Top Stat Cards */}

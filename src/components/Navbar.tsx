@@ -1,16 +1,22 @@
 import React from 'react';
-import { ShieldCheck, Cpu, Activity, Terminal, Layers, Home, LogOut, Lock } from 'lucide-react';
+import { ShieldCheck, Cpu, Activity, Terminal, Layers, LogIn, LogOut } from 'lucide-react';
 
 interface NavbarProps {
   activeTab: string;
   setActiveTab: (tab: string) => void;
   isLoggedIn: boolean;
+  onNavigateToLogin: () => void;
   onLogout: () => void;
 }
 
-export const Navbar: React.FC<NavbarProps> = ({ activeTab, setActiveTab, isLoggedIn, onLogout }) => {
+export const Navbar: React.FC<NavbarProps> = ({
+  activeTab,
+  setActiveTab,
+  isLoggedIn,
+  onNavigateToLogin,
+  onLogout,
+}) => {
   const navItems = [
-    { id: 'home', label: 'Home', icon: Home },
     { id: 'dashboard', label: 'Dashboard', icon: Cpu },
     { id: 'inspector', label: 'Live Inspector', icon: Activity },
     { id: 'playground', label: 'API Playground', icon: Terminal },
@@ -18,7 +24,7 @@ export const Navbar: React.FC<NavbarProps> = ({ activeTab, setActiveTab, isLogge
   ];
 
   return (
-    <header className="sticky top-0 z-50 bg-[#090d16]/95 backdrop-blur-xl border-b border-slate-800/80 px-4 lg:px-8 h-16 flex items-center justify-between">
+    <header className="sticky top-0 z-50 bg-[#090d16]/95 backdrop-blur-xl border-b border-slate-800/80 px-4 lg:px-8 h-16 flex items-center justify-between font-['Plus_Jakarta_Sans',sans-serif]">
       <div className="max-w-[1600px] w-full mx-auto flex items-center justify-between gap-6">
         
         {/* Left: Brand Identity & Network Badge */}
@@ -46,8 +52,8 @@ export const Navbar: React.FC<NavbarProps> = ({ activeTab, setActiveTab, isLogge
           </div>
         </div>
 
-        {/* Center: Standard Navigation Tabs */}
-        {isLoggedIn && (
+        {/* Center: Standard Navigation Tabs (Only Visible When Logged In) */}
+        {isLoggedIn ? (
           <nav className="flex items-center gap-1 bg-slate-900/80 p-1 rounded-xl border border-slate-800/90 text-xs font-medium">
             {navItems.map((item) => {
               const Icon = item.icon;
@@ -68,23 +74,31 @@ export const Navbar: React.FC<NavbarProps> = ({ activeTab, setActiveTab, isLogge
               );
             })}
           </nav>
+        ) : (
+          <div className="hidden sm:block text-xs font-medium text-slate-400 font-mono">
+            Public Gateway Preview
+          </div>
         )}
 
-        {/* Right: Judge Credentials & Sign Out */}
+        {/* Right: Sign In / Judge Demo CTA or Sign Out */}
         <div className="flex items-center gap-3">
           {isLoggedIn ? (
             <button
               onClick={onLogout}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-800 text-xs font-medium transition-colors"
+              className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-800 text-xs font-medium transition-colors"
               title="Sign Out"
             >
               <LogOut className="w-3.5 h-3.5 text-rose-400" />
               <span>Sign Out</span>
             </button>
           ) : (
-            <div className="px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-300 text-xs font-mono">
-              Judge Demo Mode
-            </div>
+            <button
+              onClick={onNavigateToLogin}
+              className="flex items-center gap-2 px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs shadow-lg shadow-indigo-600/30 transition-all hover:scale-105"
+            >
+              <LogIn className="w-4 h-4" />
+              <span>Sign In / Judge Demo</span>
+            </button>
           )}
         </div>
 
