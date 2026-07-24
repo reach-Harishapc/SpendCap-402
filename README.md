@@ -79,7 +79,7 @@ However, if an AI agent enters an infinite execution loop or gets compromised, i
 
 ### 1. Install Dependencies
 ```bash
-git clone https://github.com/harishapc/SpendCap-402.git
+git clone https://github.com/reach-Harishapc/SpendCap-402.git
 cd SpendCap-402
 npm install
 ```
