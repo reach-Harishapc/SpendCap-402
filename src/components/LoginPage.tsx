@@ -107,11 +107,11 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLoginSuccess }) => {
         <div className="pt-4 border-t border-slate-800 text-[11px] text-slate-400 grid grid-cols-2 gap-2 text-center">
           <div className="flex items-center justify-center gap-1">
             <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
-            <span>HTTP 402 Standard</span>
+            <span>HTTP 402 (@x402/avm)</span>
           </div>
           <div className="flex items-center justify-center gap-1">
             <CheckCircle2 className="w-3.5 h-3.5 text-indigo-400" />
-            <span>Base Mainnet (8453)</span>
+            <span>Algorand Testnet</span>
           </div>
         </div>
 

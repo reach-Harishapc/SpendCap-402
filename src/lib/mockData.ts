@@ -1,11 +1,11 @@
-import { Agent, InterceptLog, TransactionReceipt } from './types';
+import { Agent, InterceptLog } from './types';
 
 export const INITIAL_AGENTS: Agent[] = [
   {
     id: 'agent-01',
     name: 'AutoCode-Reviewer-v2',
-    role: 'CI/CD Code Auditor',
-    walletAddress: '0x71C7656EC7ab88b098defB751B7401B5f6d8976F',
+    role: 'CI/CD Code Auditor (Algorand)',
+    walletAddress: '2UBTX7TW3AZKCXDVRUT66SRMTUsDSEROOFSGILPUZNCVJEF325L6AQ4CDA',
     spentTodayUsd: 1.45,
     dailyLimitUsd: 5.00,
     maxCostPerCallUsd: 0.25,
@@ -15,7 +15,7 @@ export const INITIAL_AGENTS: Agent[] = [
     policy: {
       maxCostPerCallUsd: 0.25,
       dailyLimitUsd: 5.00,
-      allowedDomains: ['api.codeaudit.ai', 'x402.dev', 'api.github.com'],
+      allowedDomains: ['api.codeaudit.ai', 'x402.dev', 'api.github.com', 'testnet.goplausible.com'],
       requireSignedReceipt: true,
       rateLimitPerMin: 30
     }
@@ -24,7 +24,7 @@ export const INITIAL_AGENTS: Agent[] = [
     id: 'agent-02',
     name: 'DataScraper-Crawler',
     role: 'Market Data Aggregator',
-    walletAddress: '0x3C44CdD459693451D7813a43731a5c0778424651',
+    walletAddress: '4K3W2M7N8P9Q0R1S2T3U4V5W6X7Y8Z9A0B1C2D3E4F5G6H7J8K9L0M1',
     spentTodayUsd: 4.90,
     dailyLimitUsd: 5.00,
     maxCostPerCallUsd: 0.10,
@@ -34,7 +34,7 @@ export const INITIAL_AGENTS: Agent[] = [
     policy: {
       maxCostPerCallUsd: 0.10,
       dailyLimitUsd: 5.00,
-      allowedDomains: ['oracle.coingecko.com', 'api.dexscreener.com'],
+      allowedDomains: ['oracle.coingecko.com', 'api.dexscreener.com', 'testnet.goplausible.com'],
       requireSignedReceipt: true,
       rateLimitPerMin: 60
     }
@@ -43,7 +43,7 @@ export const INITIAL_AGENTS: Agent[] = [
     id: 'agent-03',
     name: 'LegalRisk-Analyzer-Agent',
     role: 'Contract Vulnerability Scanner',
-    walletAddress: '0x90F79bf6EB2c4f870365E785982E1f101E93b906',
+    walletAddress: '7M8N9P0Q1R2S3T4U5V6W7X8Y9Z0A1B2C3D4E5F6G7H8J9K0L1M2N3',
     spentTodayUsd: 0.80,
     dailyLimitUsd: 10.00,
     maxCostPerCallUsd: 0.50,
@@ -53,7 +53,7 @@ export const INITIAL_AGENTS: Agent[] = [
     policy: {
       maxCostPerCallUsd: 0.50,
       dailyLimitUsd: 10.00,
-      allowedDomains: ['api.legalrisk.io', 'solidity-audit.org'],
+      allowedDomains: ['api.legalrisk.io', 'solidity-audit.org', 'testnet.goplausible.com'],
       requireSignedReceipt: true,
       rateLimitPerMin: 15
     }
@@ -62,7 +62,7 @@ export const INITIAL_AGENTS: Agent[] = [
     id: 'agent-04',
     name: 'LangChain-Summarizer-Bot',
     role: 'Meeting & Doc Processor',
-    walletAddress: '0x15d34AA5453488E559619bBF15Ce70A64324f46A',
+    walletAddress: '9P0Q1R2S3T4U5V6W7X8Y9Z0A1B2C3D4E5F6G7H8J9K0L1M2N3P4Q5',
     spentTodayUsd: 0.00,
     dailyLimitUsd: 2.00,
     maxCostPerCallUsd: 0.05,
@@ -72,7 +72,7 @@ export const INITIAL_AGENTS: Agent[] = [
     policy: {
       maxCostPerCallUsd: 0.05,
       dailyLimitUsd: 2.00,
-      allowedDomains: ['api.openai.com', 'api.anthropic.com'],
+      allowedDomains: ['api.openai.com', 'api.anthropic.com', 'testnet.goplausible.com'],
       requireSignedReceipt: true,
       rateLimitPerMin: 10
     }
@@ -88,8 +88,9 @@ export const INITIAL_LOGS: InterceptLog[] = [
     endpoint: '/api/v1/ai-summarize',
     costUsd: 0.15,
     status: 'ALLOWED',
-    message: 'x402 challenge verified & EIP-712 auto-signed',
-    txReceipt: '0x8f2a9...c41e'
+    message: 'x402 AVM challenge verified via GoPlausible facilitator',
+    txReceipt: 'Z7X2J4K5V6M7N8P9Q0R1S2T3U4V5W6X7Y8Z9A0B1C2D3E4F5G6H7',
+    explorerUrl: 'https://lora.algokit.io/testnet/transaction/Z7X2J4K5V6M7N8P9Q0R1S2T3U4V5W6X7Y8Z9A0B1C2D3E4F5G6H7'
   },
   {
     id: 'log-102',
@@ -99,7 +100,7 @@ export const INITIAL_LOGS: InterceptLog[] = [
     endpoint: 'https://oracle.coingecko.com/v3/simple/price',
     costUsd: 0.20,
     status: 'BLOCKED_CAP',
-    message: 'Policy Violation: Cost ($0.20) exceeds max per call ($0.10)',
+    message: 'Policy Violation: Cost ($0.20 ALGO) exceeds max per call ($0.10)',
   },
   {
     id: 'log-103',
@@ -109,8 +110,9 @@ export const INITIAL_LOGS: InterceptLog[] = [
     endpoint: 'https://api.legalrisk.io/scan',
     costUsd: 0.40,
     status: 'ALLOWED',
-    message: 'x402 challenge verified & EIP-712 auto-signed',
-    txReceipt: '0x3b11e...90aa'
+    message: 'x402 AVM challenge verified via GoPlausible facilitator',
+    txReceipt: 'B3C4D5E6F7G8H9J0K1L2M3N4P5Q6R7S8T9U0V1W2X3Y4Z5A6B7C8',
+    explorerUrl: 'https://lora.algokit.io/testnet/transaction/B3C4D5E6F7G8H9J0K1L2M3N4P5Q6R7S8T9U0V1W2X3Y4Z5A6B7C8'
   },
   {
     id: 'log-104',

@@ -71,9 +71,9 @@ export const LandingHome: React.FC<LandingHomeProps> = ({ onLaunchConsole, setAc
             <div className="p-3 rounded-xl bg-emerald-500/10 text-emerald-400 w-fit">
               <Lock className="w-6 h-6" />
             </div>
-            <h3 className="text-base font-bold text-white">EIP-712 Receipt Vault</h3>
+            <h3 className="text-base font-bold text-white">Algorand AVM Receipt Vault</h3>
             <p className="text-xs text-slate-400 leading-relaxed">
-              Generates cryptographic typed signatures & immutable transaction receipts on Base Mainnet (8453).
+              Generates cryptographic AVM signatures & immutable receipts via GoPlausible on Algorand Testnet.
             </p>
           </div>
 
@@ -121,7 +121,7 @@ export const LandingHome: React.FC<LandingHomeProps> = ({ onLaunchConsole, setAc
 
           <div className="p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-1.5">
             <div className="text-sky-400 font-bold">3. Policy Check</div>
-            <p className="text-slate-400 font-sans text-xs">Proxy checks budget & signs EIP-712 payload.</p>
+            <p className="text-slate-400 font-sans text-xs">Proxy checks budget & signs AVM payload via GoPlausible.</p>
           </div>
 
           <div className="p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-1.5">

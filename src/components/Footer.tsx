@@ -76,7 +76,7 @@ export const Footer: React.FC<FooterProps> = ({ setActiveTab, onOpenPrivacy, onO
             </li>
             <li className="flex items-center gap-1.5 text-slate-400">
               <span className="w-1.5 h-1.5 rounded-full bg-indigo-400"></span>
-              <span>Base Mainnet (8453)</span>
+              <span>Algorand Testnet (@x402/avm)</span>
             </li>
           </ul>
         </div>
@@ -85,9 +85,9 @@ export const Footer: React.FC<FooterProps> = ({ setActiveTab, onOpenPrivacy, onO
         <div className="space-y-3">
           <h4 className="text-xs font-bold text-white uppercase tracking-wider">Protocol Standards</h4>
           <div className="p-3 rounded-xl bg-slate-900 border border-slate-800 space-y-1.5 text-xs">
-            <div className="font-semibold text-white">x402 Micropayment Rail</div>
-            <div className="text-slate-400 text-[11px]">EIP-712 Typed Cryptographic Signatures</div>
-            <div className="text-indigo-400 font-mono text-[10px] font-bold">Base Mainnet Chain 8453</div>
+            <div className="font-semibold text-white">GoPlausible Facilitator Rail</div>
+            <div className="text-slate-400 text-[11px]">@x402/avm Cryptographic Signatures</div>
+            <div className="text-emerald-400 font-mono text-[10px] font-bold">Algorand Testnet / Lora Explorer</div>
           </div>
         </div>
       </div>

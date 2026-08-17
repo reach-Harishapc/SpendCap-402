@@ -7,24 +7,24 @@ export const ArchitectureView: React.FC = () => {
       {/* Header */}
       <div className="glass-panel p-6 rounded-2xl border border-slate-800">
         <div className="flex items-center gap-2 mb-1">
-          <Layers className="w-5 h-5 text-indigo-400" />
-          <h2 className="text-lg font-extrabold text-white">System Architecture & Protocol Specifications</h2>
+          <Layers className="w-5 h-5 text-emerald-400" />
+          <h2 className="text-lg font-extrabold text-white">System Architecture & Algorand Protocol Specifications</h2>
         </div>
         <p className="text-xs text-slate-400">
-          Enterprise technical specification of the SpendCap 402 Egress Proxy, Policy Engine, and HTTP 402 Protocol Implementation
+          Enterprise technical specification of the SpendCap 402 Egress Proxy, Algorand AVM Policy Engine, and GoPlausible Facilitator Implementation
         </p>
       </div>
 
       {/* Visual System Architecture Flow Diagram */}
       <div className="glass-panel p-6 rounded-2xl border border-slate-800 space-y-6">
-        <h3 className="text-sm font-bold text-white uppercase tracking-wider text-indigo-300">
-          End-to-End Egress Proxy Flow Diagram
+        <h3 className="text-sm font-bold text-white uppercase tracking-wider text-emerald-400">
+          End-to-End Algorand Egress Proxy Flow Diagram
         </h3>
 
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 text-xs font-mono">
           {/* Step 1 */}
           <div className="p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-2 relative">
-            <div className="text-indigo-400 font-bold">1. AI Agent Call</div>
+            <div className="text-emerald-400 font-bold">1. AI Agent Call</div>
             <p className="text-slate-400 font-sans text-xs">
               Autonomous Agent (e.g. LangChain / CrewAI) calls target API endpoint.
             </p>
@@ -35,12 +35,12 @@ export const ArchitectureView: React.FC = () => {
 
           {/* Step 2 */}
           <div className="p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-2">
-            <div className="text-amber-400 font-bold">2. HTTP 402 Challenge</div>
+            <div className="text-amber-400 font-bold">2. Algorand 402 Challenge</div>
             <p className="text-slate-400 font-sans text-xs">
-              Target server returns HTTP 402 Payment Required with price, recipient, & nonce.
+              Target server returns HTTP 402 with ALGO price, Algorand recipient, & GoPlausible facilitator.
             </p>
             <div className="p-2 rounded bg-slate-900 text-amber-300 text-[11px]">
-              HTTP 402 (Price: $0.15)
+              402 (0.15 ALGO via GoPlausible)
             </div>
           </div>
 
@@ -57,12 +57,12 @@ export const ArchitectureView: React.FC = () => {
 
           {/* Step 4 */}
           <div className="p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-2">
-            <div className="text-emerald-400 font-bold">4. Auto-Sign & Settle</div>
+            <div className="text-emerald-400 font-bold">4. AVM Sign & Settle</div>
             <p className="text-slate-400 font-sans text-xs">
-              Proxy generates EIP-712 auth header, retries request, & logs immutable receipt.
+              Proxy generates AVM auth header, retries request, & logs Algorand Lora Explorer receipt.
             </p>
             <div className="p-2 rounded bg-slate-900 text-emerald-300 text-[11px]">
-              Receipt: 0x8f2a...c41e
+              TxID: Z7X2J4K...
             </div>
           </div>
         </div>
@@ -79,15 +79,15 @@ export const ArchitectureView: React.FC = () => {
           <ul className="space-y-3 text-xs text-slate-300">
             <li className="flex items-start gap-2">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 mt-1.5"></span>
-              <span><strong>x402 Payment Gateway</strong>: Intercepts & processes HTTP 402 Payment Required challenges natively across Web3 APIs.</span>
+              <span><strong>Algorand x402 Payment Gateway</strong>: Intercepts & processes HTTP 402 Payment Required challenges natively on Algorand Testnet.</span>
             </li>
             <li className="flex items-start gap-2">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 mt-1.5"></span>
-              <span><strong>Spend Policy Engine</strong>: Enforces custom per-call caps and 24-hour daily budget ceilings for autonomous AI agent fleets.</span>
+              <span><strong>GoPlausible Facilitator Protocol</strong>: Routes and settles microALGO payments via GoPlausible (`https://testnet.goplausible.com`).</span>
             </li>
             <li className="flex items-start gap-2">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 mt-1.5"></span>
-              <span><strong>Receipt Verification Vault</strong>: Generates cryptographic EIP-712 transaction receipts and maintains immutable audit ledgers.</span>
+              <span><strong>Receipt Verification Vault</strong>: Generates cryptographic AVM transaction receipts and provides instant verification links on Algorand Lora Explorer (`https://lora.algokit.io/testnet`).</span>
             </li>
           </ul>
         </div>
@@ -101,7 +101,7 @@ export const ArchitectureView: React.FC = () => {
           <ul className="space-y-3 text-xs text-slate-300">
             <li className="flex items-start gap-2">
               <span className="w-1.5 h-1.5 rounded-full bg-indigo-400 mt-1.5"></span>
-              <span><strong>EIP-712 Typed Signatures</strong>: Secure off-chain payment authorization matching Base Mainnet (Chain ID 8453) smart contract standards.</span>
+              <span><strong>@x402/avm Native Signatures</strong>: Secure AVM off-chain payment authorization matching Algorand smart contract standards.</span>
             </li>
             <li className="flex items-start gap-2">
               <span className="w-1.5 h-1.5 rounded-full bg-indigo-400 mt-1.5"></span>
@@ -109,7 +109,7 @@ export const ArchitectureView: React.FC = () => {
             </li>
             <li className="flex items-start gap-2">
               <span className="w-1.5 h-1.5 rounded-full bg-indigo-400 mt-1.5"></span>
-              <span><strong>Replay & Nonce Protection</strong>: Uses single-use nonces to prevent double-spending and transaction replay exploits.</span>
+              <span><strong>Algorand Fast Finality</strong>: Benefit from 3.3-second instant transaction finality on Algorand Testnet.</span>
             </li>
           </ul>
         </div>

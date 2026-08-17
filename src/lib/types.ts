@@ -33,6 +33,9 @@ export interface TransactionReceipt {
   signature: string;
   blockNumber: number;
   status: 'SETTLED' | 'BLOCKED' | 'FAILED';
+  chain?: string;
+  facilitator?: string;
+  explorerUrl?: string;
 }
 
 export interface InterceptLog {
@@ -45,6 +48,7 @@ export interface InterceptLog {
   status: 'ALLOWED' | 'BLOCKED_CAP' | 'BLOCKED_DOMAIN' | 'CHALLENGED';
   message: string;
   txReceipt?: string;
+  explorerUrl?: string;
 }
 
 export interface ProtocolStep {

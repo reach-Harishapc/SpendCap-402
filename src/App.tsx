@@ -172,7 +172,17 @@ export function App() {
                       </div>
 
                       <div className="flex items-center gap-3 justify-between sm:justify-end">
-                        <span className="text-indigo-300 font-bold">${log.costUsd.toFixed(2)}</span>
+                        <span className="text-emerald-300 font-bold">{log.costUsd.toFixed(2)} ALGO</span>
+                        {log.explorerUrl && (
+                          <a
+                            href={log.explorerUrl}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="px-2 py-0.5 rounded bg-slate-900 hover:bg-slate-800 text-emerald-400 border border-emerald-500/30 text-[10px] flex items-center gap-1 font-mono transition-colors"
+                          >
+                            Lora Explorer ↗
+                          </a>
+                        )}
                         {log.status === 'ALLOWED' ? (
                           <span className="px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-[10px]">
                             ALLOWED & SIGNED

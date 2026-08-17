@@ -12,6 +12,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@x402/avm": "^2.22.0",
+    "@x402/core": "^2.22.0",
+    "algosdk": "^3.6.0",
     "clsx": "^2.1.1",
     "cors": "^2.8.5",
     "express": "^4.19.2",

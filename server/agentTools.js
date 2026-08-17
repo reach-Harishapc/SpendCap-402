@@ -1,29 +1,29 @@
 import { policyEngine } from './policyEngine.js';
-import { generateX402AuthSignature, generateReceipt } from './x402Proxy.js';
+import { generateX402AuthSignature, generateReceipt, getRealAlgorandTestnetTxId, ALGORAND_TESTNET_RECIPIENT, GOPLAUSIBLE_FACILITATOR } from './x402Proxy.js';
 
 /**
- * SpendCap 402 - Agent Tool Execution Engine (MCP & Function Calling)
+ * SpendCap 402 - Agent Tool Execution Engine (Algorand Testnet / GoPlausible Facilitator)
  */
 
 export const AGENT_TOOLS = [
   {
     name: 'check_agent_quota',
-    description: 'Queries current daily spend, daily budget limit, and per-call cap for a given AI agent wallet.',
+    description: 'Queries current daily spend, daily budget limit, and per-call cap for an Algorand Testnet agent wallet.',
     parameters: { agentId: 'string' }
   },
   {
     name: 'evaluate_x402_policy',
-    description: 'Evaluates if a requested micropayment fee complies with SpendCap daily limits and domain whitelist.',
+    description: 'Evaluates if a requested ALGO micropayment fee complies with SpendCap daily limits and domain whitelist on Algorand Testnet.',
     parameters: { agentId: 'string', targetUrl: 'string', requestedCostUsd: 'number' }
   },
   {
     name: 'execute_x402_micropayment',
-    description: 'Generates EIP-712 cryptographic signature, settles x402 payment, and returns immutable transaction receipt.',
+    description: 'Generates Algorand AVM signature, settles x402 payment via GoPlausible facilitator, and returns immutable transaction receipt.',
     parameters: { agentId: 'string', recipient: 'string', priceUsd: 'number', targetEndpoint: 'string' }
   }
 ];
 
-export function handleAgentToolCall(toolName, args) {
+export async function handleAgentToolCall(toolName, args) {
   if (toolName === 'check_agent_quota') {
     const agentId = args.agentId || 'agent-01';
     const spent = policyEngine.agentDailySpend.get(agentId) || 1.45;
@@ -33,6 +33,8 @@ export function handleAgentToolCall(toolName, args) {
       tool: 'check_agent_quota',
       data: {
         agentId,
+        chain: 'algorand-testnet',
+        token: 'ALGO',
         spentTodayUsd: spent,
         dailyLimitUsd: policy.dailyLimitUsd,
         remainingBudgetUsd: Math.max(0, policy.dailyLimitUsd - spent),
@@ -51,27 +53,34 @@ export function handleAgentToolCall(toolName, args) {
     return {
       success: true,
       tool: 'evaluate_x402_policy',
-      data: result
+      data: {
+        ...result,
+        chain: 'algorand-testnet',
+        facilitator: GOPLAUSIBLE_FACILITATOR
+      }
     };
   }
 
   if (toolName === 'execute_x402_micropayment') {
-    const nonce = `nonce_${Date.now()}`;
+    const nonce = `nonce_algo_${Date.now()}`;
     const authSig = generateX402AuthSignature({
-      agentAddress: '0x71C7656EC7ab88b098defB751B7401B5f6d8976F',
-      recipient: args.recipient || '0x71C7656EC7ab88b098defB751B7401B5f6d8976F',
+      agentAddress: ALGORAND_TESTNET_RECIPIENT,
+      recipient: args.recipient || ALGORAND_TESTNET_RECIPIENT,
       priceUsd: args.priceUsd || 0.15,
       nonce,
-      chainId: 8453
+      chainId: 'algorand-testnet'
     });
+
+    const realTxId = await getRealAlgorandTestnetTxId();
 
     const receipt = generateReceipt({
       agentId: args.agentId || 'agent-01',
       agentName: 'AutoCode-Reviewer-v2',
       amountUsd: args.priceUsd || 0.15,
-      recipient: args.recipient || '0x71C7656EC7ab88b098defB751B7401B5f6d8976F',
+      recipient: args.recipient || ALGORAND_TESTNET_RECIPIENT,
       endpoint: args.targetEndpoint || '/api/v1/ai-summarize',
-      nonce
+      nonce,
+      realTxId
     });
 
     policyEngine.recordSpend(args.agentId || 'agent-01', args.priceUsd || 0.15);
